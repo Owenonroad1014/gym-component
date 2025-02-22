@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filter Buttons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap" rel="stylesheet" />
+    <style>
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid #e66b00;
+            border-radius: 5px;
+            color: #e66b00;
+            background: transparent;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: "Noto Serif TC", serif;
+        }
+        .filter-btn.active {
+            background: #e66b00;
+            color: white;
+        }
+        .filter-btn:hover {
+            background: #D97F5C20;
+        }
+    </style>
+</head>
+<body>
+    <div class="filter-container">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">大分類</button>
+        <button class="filter-btn">button</button>
+        <button class="filter-btn">大分類</button>
+        <button class="filter-btn">大分類</button>
+    </div>
+    <div class="filter-container">
+        <button class="filter-btn">小分類</button>
+        <button class="filter-btn">button</button>
+        <button class="filter-btn">小分類</button>
+        <button class="filter-btn">小分類</button>
+        <button class="filter-btn">button</button>
+    </div>
+
+    <script>
+        document.querySelectorAll('.filter-container').forEach(container => {
+            const buttons = container.querySelectorAll('.filter-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

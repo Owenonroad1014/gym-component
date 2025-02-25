@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暗色背景麵包屑導航</title>
+    <!-- 引入 Noto Serif TC 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Noto Serif TC", serif;
+            background-color: #f5f5f5;
+            padding: 0;
+        }
+        
+        .breadcrumb-container {
+            width: 100%;
+            background-color: #1a1a1a;
+            position: relative;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            color: #fff;
+        }
+        
+        .breadcrumb-item {
+            position: relative;
+            margin-right: 10px;
+            padding-right: 10px;
+            font-size: 18px;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+        
+        .breadcrumb-item:not(:last-child)::after {
+            content: "/";
+            position: absolute;
+            right: -1px;
+            color: #777;
+            font-size: 18px;
+        }
+        
+        .breadcrumb-item a {
+            text-decoration: none;
+            color: #fff;
+            padding: 3px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* 懸停效果 */
+        .breadcrumb-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .breadcrumb-item:hover a {
+            color: #ccc;
+        }
+        
+        /* 活動狀態 */
+        .breadcrumb-item.active a {
+            color: #f87808;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb-container">
+        <nav class="breadcrumb">
+            <div class="breadcrumb-item active">
+                <a href="#">首頁</a>
+            </div>
+            
+            <div class="breadcrumb-item ">
+                <a href="#">label</a>
+            </div>
+            <div class="breadcrumb-item ">
+                <a href="#">健身教練</a>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 為所有麵包屑項目添加點擊效果
+            const breadcrumbItems = document.querySelectorAll('.breadcrumb-item');
+            
+            breadcrumbItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // 移除所有項目的活動狀態
+                    breadcrumbItems.forEach(i => i.classList.remove('active'));
+                    
+                    // 為當前點擊的項目添加活動狀態
+                    this.classList.add('active');
+                    
+                    // 添加點擊動畫效果
+                    this.style.transform = 'translateY(1px)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

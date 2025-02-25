@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness Carousel</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #ffffff;
+        font-family: "Noto Serif TC", serif;
+      }
+      .container {
+        background: #1c1c1c;
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+      }
+      .carousel {
+        position: relative;
+        width: 450px;
+        height: 350px;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+      .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .slide {
+        min-width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff6600, #ff3300);
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        border-radius: 12px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      .progress-bar {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        height: 6px;
+        display: flex;
+        gap: 4px;
+        cursor: pointer;
+      }
+      .progress-segment {
+        flex: 1;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-segment::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        transition: transform 0.3s;
+      }
+
+      .progress-segment.active {
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      .progress-segment.active::before {
+        animation: progressFill 3s linear;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes progressFill {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="carousel">
+        <div class="slides">
+          <div class="slide">photo 1</div>
+          <div class="slide">photo 2</div>
+          <div class="slide">photo 3</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-segment" data-index="0"></div>
+          <div class="progress-segment" data-index="1"></div>
+          <div class="progress-segment" data-index="2"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const slides = document.querySelector(".slides");
+      const progressSegments = document.querySelectorAll(".progress-segment");
+      let index = 0;
+      let interval;
+
+      function updateCarousel() {
+        slides.style.transform = `translateX(-${index * 100}%)`;
+        progressSegments.forEach((seg) => {
+          seg.classList.remove("active");
+        });
+        const currentSegment = progressSegments[index];
+        currentSegment.classList.add("active");
+      }
+
+      function stopAutoPlay() {
+        clearInterval(interval);
+      }
+
+      function startAutoPlay() {
+        interval = setInterval(() => {
+          index = (index + 1) % 3;
+          updateCarousel();
+        }, 3000);
+      }
+
+      // 點擊進度條切換
+      progressSegments.forEach((segment) => {
+        segment.addEventListener("click", (e) => {
+          stopAutoPlay();
+          index = parseInt(e.target.dataset.index);
+          updateCarousel();
+          startAutoPlay();
+        });
+      });
+
+      // 初始化
+      updateCarousel();
+      startAutoPlay();
+    </script>
+  </body>
+</html>

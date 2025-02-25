@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap" rel="stylesheet" />
+  <style>
+    .carousel-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      color: white;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #666;
+      margin-right: 12px;
+    }
+
+    .username {
+      flex-grow: 1;
+      font-family: "Noto Serif TC", serif;
+    }
+
+    .more-options {
+      color: #fff;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .carousel {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+      height: 100%;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-button.prev {
+      left: 10px;
+    }
+
+    .carousel-button.next {
+      right: 10px;
+    }
+
+    .progress-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      padding: 10px;
+    }
+
+    .progress-bar {
+      height: 2px;
+      background: rgba(255, 255, 255, 0.3);
+      flex: 1;
+      margin: 0 2px;
+    }
+
+    .progress-bar.active {
+      background: white;
+    }
+
+    .time-info {
+      padding: 12px;
+      color: #999;
+      font-size: 14px;
+      font-family: "Noto Serif TC", serif;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel-container">
+    <div class="header">
+      <div class="avatar"></div>
+      <div class="username">商品名稱</div>
+      <button class="more-options">•••</button>
+    </div>
+    
+    <div class="carousel">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <img src="../images/product1.jpg" alt="Slide 1">
+        </div>
+        <div class="carousel-slide">
+          <img src="../images/product2.jpg" alt="Slide 2">
+        </div>
+        <div class="carousel-slide">
+          <img src="../images/product3.jpg" alt="Slide 3">
+        </div>
+      </div>
+      
+      <button class="carousel-button prev">←</button>
+      <button class="carousel-button next">→</button>
+      
+      <div class="progress-container">
+        <div class="progress-bar active"></div>
+        <div class="progress-bar"></div>
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+    
+    <div class="time-info">過去 2 天</div>
+  </div>
+
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    const progressBars = document.querySelectorAll('.progress-bar');
+    
+    let currentIndex = 0;
+    
+    function updateCarousel() {
+      // Update slide position
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      
+      // Update progress bars
+      progressBars.forEach((bar, index) => {
+        bar.classList.toggle('active', index === currentIndex);
+      });
+    }
+    
+    prevButton.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateCarousel();
+    });
+    
+    nextButton.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateCarousel();
+    });
+  </script>
+</body>
+</html>

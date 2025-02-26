@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>搜尋欄位</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        .search-container {
+            padding: 20px;
+        }
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            font-size: 16px;
+            font-family: "Noto Serif TC", serif;
+        }
+        
+        button {
+            padding: 8px 20px;
+            background-color: #f87808;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 18px;
+            font-family: "Noto Serif TC", serif;
+
+
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <form class="search-form">
+            <input type="text" placeholder="請輸入課程名稱/商品名稱">
+           
+            <button type="submit">搜尋</button>
+        </form>
+    </div>
+</body>
+</html>

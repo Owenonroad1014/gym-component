@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>搜尋欄位</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        .search-container {
+            
+            padding: 20px;
+        }
+        .search-form {
+            
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+        }
+        select {
+            padding: 8px;
+            width: 120px;
+            border-radius: 3px;
+            font-family: "Noto Serif TC", serif;
+            font-size: 18px;
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #f87808;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 18px;
+            font-family: "Noto Serif TC", serif;
+
+
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <form class="search-form">
+            <!-- <input type="text" placeholder="請輸入(例：工作職稱、公司名、技能專長...)"> -->
+            <select>
+                <option value="">地區</option>
+                <option value="taipei">台北市</option>
+                <option value="newtaipei">新北市</option>
+            </select>
+            <select>
+                <option value="">分店</option>
+                <option value="">中華店</option>
+                <option value="">中山店</option>
+            </select>
+            <button type="submit">搜尋</button>
+        </form>
+    </div>
+</body>
+</html>
